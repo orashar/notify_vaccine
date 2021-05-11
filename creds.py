@@ -1,2 +1,2 @@
-sender_id = "omparashar15@gmail.com" #your gmail id here
-sender_pass = "nayawala" #password of the gmail account
+sender_id = "" #your gmail id here
+sender_pass = "" #password of the gmail account
