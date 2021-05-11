@@ -54,4 +54,4 @@ def sendEmail(centers_list, to, PINCODE):
         print("Email sent to ", to)
         smtpObj.quit()
     except Exception as e:
-        print(f"error sending email.{e}")
+        print(e)

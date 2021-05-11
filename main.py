@@ -9,6 +9,8 @@ import time
 import emailService
 import validator
 import request_handler
+import random
+import notify
 
 
 
@@ -22,7 +24,7 @@ AGE_LIMIT = -1
 
 EMAIL = ""
 
-DELAY = 60
+DELAY = random.randint(60,120)
 
 def inputs():
 
@@ -41,7 +43,7 @@ def inputs():
     while not validator.validate_agelimit:
         invalid_count += 1
         print("invalid Age limit")
-        age_limit = (input("Age limit ( 18 / 45 )"))
+        age_limit = int(input("Age limit ( 18 / 45 )"))
         if(invalid_count > 10): sys.exit("Too many invalid inputs")
     global AGE_LIMIT
     AGE_LIMIT = age_limit
@@ -78,6 +80,7 @@ def main():
         if len(available_centers) == 0:
             print(f"No centers available for selected Age group")
         else:
+            notify.showNotification(PINCODE)
             emailService.sendEmail(available_centers, EMAIL, PINCODE)
     
 
@@ -93,12 +96,18 @@ def timer(sec):
 
 
 if __name__ == "__main__":
-    print("This program check vaccine availability every 60 seconds and notifies you via email")
-    attempt = 0
-    starttime=time.time()
-    while True:
-        attempt += 1
-        sys.stdout.write(f"\rAttempt no: {attempt}\n")
-        sys.stdout.flush()
-        main()
-        timer(DELAY)
+	print("This program check vaccine availability every 60 seconds and notifies you via email")
+	attempt = 0
+	starttime=time.time()
+	while True:
+		attempt += 1
+		sys.stdout.write(f"Attempt no: {attempt}\n")
+		sys.stdout.flush()
+		try:
+			main()
+			DELAY = random.randint(60,120)
+			timer(DELAY)
+		except Exception as e:
+			notify.showError()
+			print(e)
+			break;
