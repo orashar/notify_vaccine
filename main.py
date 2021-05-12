@@ -11,8 +11,11 @@ import validator
 import request_handler
 import random
 import notify
+import sys
 
 
+## system info
+SYSTEM = sys.platform
 
 # setting up params
 PINCODE = -1#input("enter pincode: ")
@@ -80,7 +83,7 @@ def main():
         if len(available_centers) == 0:
             print(f"No centers available for selected Age group")
         else:
-            notify.showNotification(PINCODE)
+            if SYSTEM == "linux" or platform == "linux2": notify.showNotification(PINCODE)
             emailService.sendEmail(available_centers, EMAIL, PINCODE)
     
 
@@ -108,6 +111,6 @@ if __name__ == "__main__":
 			DELAY = random.randint(60,120)
 			timer(DELAY)
 		except Exception as e:
-			notify.showError()
+			if SYSTEM == "linux" or platform == "linux2": notify.showError()
 			print(e)
 			break;
