@@ -15,4 +15,8 @@ Install the necessary python modules
 Just run `pip3 install -r requirements.txt`
 
 ## How to run the program
+
+Just run python main.py 
+
+#### to use email functionality
 Enter your gmail id and password in creds.py file for the email function to work. also allow less secure apps from your gmail account settings.
